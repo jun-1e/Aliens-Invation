@@ -1,5 +1,5 @@
 import pygame
-from bullet import Bullet
+from Public.Bullets.bullet import Bullet
 
 class Ship:
     """管理飞船的类"""
@@ -11,7 +11,7 @@ class Ship:
         self.ai_game = ai_game
         self.last_shot_time = 0
         self.bullets = pygame.sprite.Group()
-        self.life_limit = self.settings.lifes_limit
+        self.life_limit = self.settings.life_limit
         self.life = self.life_limit
 
         #加载飞船图像并获取其外接矩形
@@ -46,7 +46,7 @@ class Ship:
         self.bullets.update()
     
     def fire_bullet(self):
-        if len(self.bullets) < self.settings.bullets_allowed:
+        if self.ai_game.shooting and len(self.bullets) < self.settings.bullets_allowed:
             current_time = pygame.time.get_ticks()
             """创建子弹并加入bullets"""
             if current_time - self.last_shot_time > (
@@ -54,10 +54,6 @@ class Ship:
                 new_bullet= Bullet(self.ai_game,self)
                 self.bullets.add(new_bullet)
                 self.last_shot_time = current_time
-    
-    def check_life_change(self):
-        """检查生命值变化"""
-        pass
     
     def blitme(self):
         """在指定位置绘制飞船"""
