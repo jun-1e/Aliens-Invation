@@ -3,13 +3,14 @@ from Public.settings import Settings
 from player_ship import Ship
 from Events.hardware_event import Hardware_Event
 from Events.game_events import Game_Events
+from Public.button import Button
 
 class AlienInvasion:
     """管理游戏资源和行为类"""
     def __init__(self):
         """初始化游戏并创建游戏资源"""
         pygame.init()
-        
+        self.button = Button(400,250,400,250)
         self.transparency_count = 0
         self.spawn_timer = 0
         self.clock = pygame.time.Clock()
@@ -26,10 +27,8 @@ class AlienInvasion:
         self.playership = Ship(self)
         self.event = Game_Events(self) 
         self.hardware_event = Hardware_Event(self)
-        self.TESTBUTTOM = pygame.Rect(400,250,self.screen.get_width()/2,self.screen.get_height()/2)
-        self.buttom_color = (0,0,0)
         
-        
+                
     def run_game(self):
         """开始游戏主循环"""
         while True:
@@ -44,19 +43,18 @@ class AlienInvasion:
                     self.event._check_collisions()
                     self.event._create_fleet()
                     self.aliens_fleet.update()
-                    self.event.update_screen()               
-                    self.clock.tick(60) #设置帧率
+                    self.event.update_screen()                                    
                 elif self.Pause:                    
-                    while self.transparency_count < self.settings.Pause_transparency:
-                        self.event.draw_pause_lay()
-                        self.transparency_count+=1
-                        pygame.draw.rect(self.screen,self.buttom_color,self.TESTBUTTOM)
+                        self.event.draw_pause_lay()   
+                        self.button.button_events()
+                        self.button.draw_button(self)                        
             elif self.Dead:
                 while self.transparency_count < self.settings.Pause_transparency:
                     self.event.draw_pause_lay()
                     self.transparency_count+=1
-                
-
+            pygame.display.flip()    
+            self.clock.tick(60)
+            
 if __name__ == '__main__':
     #创建游戏实例并运行游戏
     ai=AlienInvasion()

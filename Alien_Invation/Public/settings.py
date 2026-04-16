@@ -1,6 +1,9 @@
 class Settings:
     def __init__(self):
         """初始化游戏设置"""
+        self.Button_color_default = (255,191,0)
+        self.Button_color_check = (141,105,0)
+        self.color_RED = (255,0,0)
         #屏幕设置
         self.screen_width = 1600
         self.screen_height = 1000
@@ -32,6 +35,6 @@ class Settings:
         self.enemy_bullet_damage = 1
         self.EnemyInvade_damage = 1
         self.crash_damage = 2
-        self.spawn_timer_set = 2
+        self.spawn_timer_set = 20
             #shooter
         self.Shooter_cooldown = 100   

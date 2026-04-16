@@ -50,7 +50,7 @@ class Ship:
             current_time = pygame.time.get_ticks()
             """创建子弹并加入bullets"""
             if current_time - self.last_shot_time > (
-                self.settings.bullet_cooldown and self.ai_game.shooting):
+                    self.settings.bullet_cooldown and self.ai_game.shooting):
                 new_bullet= Bullet(self.ai_game,self)
                 self.bullets.add(new_bullet)
                 self.last_shot_time = current_time

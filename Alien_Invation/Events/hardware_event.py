@@ -43,7 +43,7 @@ class Hardware_Event:
     def check_mouse_events(self,event):
         """响应鼠标动作"""
         if self.ai_game.Pause:
-            if self.ai_game.TESTBUTTOM.collidepoint(pygame.mouse.get_pos()):
+            if self.ai_game.button.rect.collidepoint(pygame.mouse.get_pos()):
                 self.ai_game.Pause = not self.ai_game.Pause
     
     def check_keyup_events(self,event):
@@ -59,11 +59,7 @@ class Hardware_Event:
         elif event.key == pygame.K_j:
             self.ai_game.shooting = False
     
-    def bottom_events(self):
-        """按钮行为"""
-        while True:
-            if self.ai_game.TESTBUTTOM.collidepoint(pygame.mouse.get_pos()):
-                self.ai_game.buttom_color = (50,50,50)
+     
         
     
     
